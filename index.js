@@ -4,13 +4,17 @@ const customers = require('./routes/customers');
 const movies = require('./routes/movies');
 const rentals = require('./routes/rentals');
 const express = require('express');
+require("dotenv").config();
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi)
 
 const app = express();
 
 //mongoose.connect('mongodb://localhost/vidly')
-mongoose.connect("mongodb+srv://senthildevel_db_user:NomqxgS8LzfT8WnV@cluster0.dfaxwpp.mongodb.net/playground?appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...'));
 
